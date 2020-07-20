@@ -2,8 +2,7 @@ package betterLab.patches;
 
 
 import betterLab.BetterLab;
-import betterSkull.BetterSkull;
-import betterSkull.events.BetterSkullEvent;
+import betterLab.events.BetterLabEvent;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
