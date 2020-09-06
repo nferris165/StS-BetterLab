@@ -41,7 +41,7 @@ public class customMetrics implements Runnable {
     private void sendPost()
     {
         LinkedHashMap<String, Serializable> event = new LinkedHashMap<>();
-        event.put("title", "BetterSkull");
+        event.put("title", "BetterLab");
         event.put("event", this.params);
         event.put("name", CardCrawlGame.playerName);
         event.put("alias", CardCrawlGame.alias);
