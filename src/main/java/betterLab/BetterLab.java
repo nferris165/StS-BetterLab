@@ -6,9 +6,11 @@ import basemod.ModPanel;
 import basemod.ReflectionHacks;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
+import betterLab.potions.LabPotion;
 import betterLab.relics.ChemicalYRelic;
 import betterLab.util.TextureLoader;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
@@ -18,6 +20,7 @@ import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
@@ -55,6 +58,9 @@ public class BetterLab implements
 
     private static final String modID = "betterLab";
 
+    public static final Color POTION_RED = CardHelper.getColor(34, 76, 25);
+    public static final Color POTION_ALT = CardHelper.getColor(2, 211, 117);
+    public static final Color POTION_BOT = CardHelper.getColor(25, 156, 2);
 
     //Image Directories
     public static String makeCardPath(String resourcePath) {
@@ -113,7 +119,7 @@ public class BetterLab implements
     }
 
     public void receiveEditPotions() {
-        //BaseMod.addPotion(NewPotion.class, SLUMBERING_POTION_RUST, SLUMBERING_TEAL, SLUMBERING_POTION_RUST, NewPotion.POTION_ID, TheSlumbering.Enums.THE_SLUMBERING);
+        BaseMod.addPotion(LabPotion.class, POTION_ALT, POTION_BOT, POTION_RED, LabPotion.POTION_ID, null);
     }
 
     @Override

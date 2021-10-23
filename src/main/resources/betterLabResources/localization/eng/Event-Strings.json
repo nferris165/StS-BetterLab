@@ -6,7 +6,7 @@
       "After much time spent mixing, swirling, and performing other important tasks, you receive your new concoction and carry on your way...",
       "You spot a book lying on the table titled \"Chemical Y\" and decide to follow it's instructions. NL Making careful use of your Chemical X, you transmute the flask into a much more pure substance.",
       "You spot a book lying on the table with #rthree #gcolorful #bladies on the cover and decide to follow it's instructions. NL You prepare the concoction and finish it by offering a bit of your own #rblood into the flask.",
-      ""
+      "You are brewing a potion unlike any other. NL It is time to add another ingredient to the mix, but which should you choose?"
     ],
     "OPTIONS": [
       "[Search] #gFind #gsome #gPotions!",
@@ -14,7 +14,11 @@
       "[Transmute] #rLose #rChemical #rX. #gObtain #ga #gspecial #grelic.",
       "[Transmute] #rLose #r",
       " #rHP. #gObtain #gChemical #gX.",
-      "[Leave]"
+      "[Leave]",
+      "[Concoct] Do something.",
+      "[Locked] Requires Cauldron.",
+      "[Brew] #yAdd ",
+      " #yto #ythe #ymixture."
     ]
   }
 }
