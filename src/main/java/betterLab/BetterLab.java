@@ -20,7 +20,6 @@ import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
@@ -133,7 +132,9 @@ public class BetterLab implements
     @Override
     public void receiveEditKeywords() {
         Gson gson = new Gson();
-        String json = Gdx.files.internal(modID + "Resources/localization/eng/Keyword-Strings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        String language = getLanguageString();
+
+        String json = Gdx.files.internal(modID + "Resources/localization/" + language + "/Keyword-Strings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
 
         if (keywords != null) {
@@ -148,30 +149,42 @@ public class BetterLab implements
 
     }
 
+    private static String getLanguageString() {
+        switch (Settings.language) {
+            case ZHS:
+                return "zhs";
+            default:
+                return "eng";
+        }
+    }
+
     @Override
     public void receiveEditStrings() {
+        // Get Localization
+        String language = getLanguageString();
+
         BaseMod.loadCustomStringsFile(CardStrings.class,
-                modID + "Resources/localization/eng/Card-Strings.json");
+                modID + "Resources/localization/" + language + "/Card-Strings.json");
         BaseMod.loadCustomStringsFile(CharacterStrings.class,
-                modID + "Resources/localization/eng/Character-Strings.json");
+                modID + "Resources/localization/" + language + "/Character-Strings.json");
         BaseMod.loadCustomStringsFile(EventStrings.class,
-                modID + "Resources/localization/eng/Event-Strings.json");
+                modID + "Resources/localization/" + language + "/Event-Strings.json");
         BaseMod.loadCustomStringsFile(MonsterStrings.class,
-                modID + "Resources/localization/eng/Monster-Strings.json");
+                modID + "Resources/localization/" + language + "/Monster-Strings.json");
         BaseMod.loadCustomStringsFile(OrbStrings.class,
-                modID + "Resources/localization/eng/Orb-Strings.json");
+                modID + "Resources/localization/" + language + "/Orb-Strings.json");
         BaseMod.loadCustomStringsFile(PotionStrings.class,
-                modID + "Resources/localization/eng/Potion-Strings.json");
+                modID + "Resources/localization/" + language + "/Potion-Strings.json");
         BaseMod.loadCustomStringsFile(PowerStrings.class,
-                modID + "Resources/localization/eng/Power-Strings.json");
+                modID + "Resources/localization/" + language + "/Power-Strings.json");
         BaseMod.loadCustomStringsFile(RelicStrings.class,
-                modID + "Resources/localization/eng/Relic-Strings.json");
+                modID + "Resources/localization/" + language + "/Relic-Strings.json");
         BaseMod.loadCustomStringsFile(UIStrings.class,
-                modID + "Resources/localization/eng/UI-Strings.json");
+                modID + "Resources/localization/" + language + "/UI-Strings.json");
     }
 
     private void loadAudio() {
-        HashMap<String, Sfx> map = (HashMap<String, Sfx>) ReflectionHacks.getPrivate(CardCrawlGame.sound, SoundMaster.class, "map");
+        HashMap<String, Sfx> map = ReflectionHacks.getPrivate(CardCrawlGame.sound, SoundMaster.class, "map");
         //map.put("Pop", new Sfx(AUDIO_PATH + "pop.ogg", false));
     }
 
