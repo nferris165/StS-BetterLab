@@ -4,11 +4,9 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.ReflectionHacks;
-import basemod.eventUtil.AddEventParams;
-import basemod.eventUtil.EventUtils;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
-import betterLab.events.BetterLabEvent;
-import betterLab.patches.customMetrics;
+import betterLab.relics.ChemicalYRelic;
 import betterLab.util.TextureLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,7 +36,6 @@ public class BetterLab implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
-        PostDeathSubscriber,
         PostInitializeSubscriber{
 
     public static final Logger logger = LogManager.getLogger(BetterLab.class.getName());
@@ -146,7 +143,7 @@ public class BetterLab implements
 
     @Override
     public void receiveEditRelics() {
-
+        BaseMod.addRelic(new ChemicalYRelic(), RelicType.SHARED);
     }
 
     private static String getLanguageString() {
@@ -218,20 +215,7 @@ public class BetterLab implements
         settingsPanel.addUIElement(ascLimitButton);
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
 
-        //events
-        BaseMod.addEvent(new AddEventParams.Builder(BetterLabEvent.ID, BetterLabEvent.class)
-                .eventType(EventUtils.EventType.SHRINE).create());
-
         //audio
         loadAudio();
-    }
-
-    @Override
-    public void receivePostDeath() {
-        customMetrics metrics = new customMetrics();
-
-        Thread t = new Thread(metrics);
-        t.setName("Metrics");
-        t.start();
     }
 }

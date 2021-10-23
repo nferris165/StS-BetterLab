@@ -1,11 +1,20 @@
 {
-  "betterSkull:BetterSkull": {
-    "NAME": "Better Knowing Skull",
+  "betterLab:BetterLab": {
+    "NAME": "Better Lab",
     "DESCRIPTIONS": [
+      "You find yourself in a room filled with racks of test tubes, beakers, flasks, forceps, pinch clamps, stirring rods, tongs, goggles, funnels, pipets, cylinders, condensers, and even a rare spiral tube of glass. NL NL Why do you know the name of all these tools? It doesn't matter, you take a look around.",
+      "After much time spent mixing, swirling, and performing other important tasks, you receive your new concoction and carry on your way...",
+      "You spot a book lying on the table titled \"Chemical Y\" and decide to follow it's instructions. NL Making careful use of your Chemical X, you transmute the flask into a much more pure substance.",
+      "You spot a book lying on the table with #rthree #gcolorful #bladies on the cover and decide to follow it's instructions. NL You prepare the concoction and finish it by offering a bit of your own #rblood into the flask.",
       ""
     ],
     "OPTIONS": [
-      ""
+      "[Search] #gFind #gsome #gPotions!",
+      "[Brew] #gCraft #ga #gunique #gpotion.",
+      "[Transmute] #rLose #rChemical #rX. #gObtain #ga #gspecial #grelic.",
+      "[Transmute] #rLose #r",
+      " #rHP. #gObtain #gChemical #gX.",
+      "[Leave]"
     ]
   }
 }
