@@ -39,6 +39,7 @@ public class BetterLabEvent extends AbstractImageEvent {
 
 
     private static final String CHEM_MSG, BREW_MSG, CHEMX_MSG, ADDPOT_MSG;
+    private static final ArrayList<String> COMMONS, UNCOMMONS, RARES, exclusions;
     private int potSlots, relicCost;
     private ArrayList<AbstractPotion> potions;
     private ArrayList<AbstractPotion> potOptions;
@@ -158,7 +159,7 @@ public class BetterLabEvent extends AbstractImageEvent {
                 temp = BetterLab.optionLimit
                         ? getPotion(rarity)
                         : AbstractDungeon.returnRandomPotion(rarity, false);
-            } while(potOptions.contains(temp));
+            } while(checkUnique(temp) || exclusions.contains(temp.ID));
             potOptions.add(temp);
         }
         this.EventText.clearAllDialogs();
@@ -167,44 +168,30 @@ public class BetterLabEvent extends AbstractImageEvent {
         this.EventText.setDialogOption(OPTIONS[8] + potOptions.get(2).name + OPTIONS[9], potOptions.get(2));
     }
 
+    private boolean checkUnique(AbstractPotion potion){
+        boolean retVal = false;
+
+        for(AbstractPotion p: potOptions){
+            if(p.ID.equals(potion.ID)){
+                retVal = true;
+            }
+        }
+
+        return retVal;
+    }
+
     private AbstractPotion getPotion(AbstractPotion.PotionRarity rarity){
         ArrayList<String> retVal = new ArrayList<>();
 
         switch(rarity){
             case COMMON:
-                retVal.add("Block Potion");
-                retVal.add("Dexterity Potion");
-                retVal.add("Energy Potion");
-                retVal.add("Explosive Potion");
-                retVal.add("Fire Potion");
-                retVal.add("Strength Potion");
-                retVal.add("Swift Potion");
-                retVal.add("Weak Potion");
-                retVal.add("FearPotion");
-                retVal.add("AttackPotion");
-                retVal.add("SkillPotion");
-                retVal.add("PowerPotion");
-                retVal.add("ColorlessPotion");
-                retVal.add("SteroidPotion");
-                retVal.add("SpeedPotion");
-                retVal.add("BlessingOfTheForge");
+                retVal = COMMONS;
                 break;
             case UNCOMMON:
-                retVal.add("Ancient Potion");
-                retVal.add("DistilledChaos");
-                retVal.add("DuplicationPotion");
-                retVal.add("EssenceOfSteel");
-                retVal.add("GamblersBrew");
-                retVal.add("LiquidBronze");
-                retVal.add("LiquidMemories");
-                retVal.add("Regen Potion");
+                retVal = UNCOMMONS;
                 break;
             case RARE:
-                retVal.add("CultistPotion");
-                retVal.add("EntropicBrew");
-                retVal.add("Fruit Juice");
-                retVal.add("SmokeBomb");
-                retVal.add("SneckoOil");
+                retVal = RARES;
                 break;
         }
 
@@ -256,6 +243,43 @@ public class BetterLabEvent extends AbstractImageEvent {
         CHEM_MSG = DESCRIPTIONS[2];
         CHEMX_MSG = DESCRIPTIONS[3];
         ADDPOT_MSG = DESCRIPTIONS[4];
+
+        COMMONS = new ArrayList<>();
+        COMMONS.add("Block Potion");
+        COMMONS.add("Dexterity Potion");
+        COMMONS.add("Energy Potion");
+        COMMONS.add("Explosive Potion");
+        COMMONS.add("Fire Potion");
+        COMMONS.add("Strength Potion");
+        COMMONS.add("Swift Potion");
+        COMMONS.add("Weak Potion");
+        COMMONS.add("FearPotion");
+        COMMONS.add("AttackPotion");
+        COMMONS.add("SkillPotion");
+        COMMONS.add("PowerPotion");
+        COMMONS.add("ColorlessPotion");
+        COMMONS.add("SteroidPotion");
+        COMMONS.add("SpeedPotion");
+        COMMONS.add("BlessingOfTheForge");
+        UNCOMMONS = new ArrayList<>();
+        UNCOMMONS.add("Ancient Potion");
+        UNCOMMONS.add("DistilledChaos");
+        UNCOMMONS.add("DuplicationPotion");
+        UNCOMMONS.add("EssenceOfSteel");
+        UNCOMMONS.add("GamblersBrew");
+        UNCOMMONS.add("LiquidBronze");
+        UNCOMMONS.add("LiquidMemories");
+        UNCOMMONS.add("Regen Potion");
+        RARES = new ArrayList<>();
+        RARES.add("CultistPotion");
+        RARES.add("EntropicBrew");
+        RARES.add("Fruit Juice");
+        RARES.add("SmokeBomb");
+        RARES.add("SneckoOil");
+
+        //excluded potions
+        exclusions = new ArrayList<>();
+        exclusions.add("FairyPotion");
     }
 
     private enum CUR_SCREEN {
