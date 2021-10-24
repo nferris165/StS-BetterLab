@@ -45,7 +45,7 @@ public class BetterLab implements
 
     //mod settings
     public static Properties defaultSettings = new Properties();
-    public static final String option_limit_settings = "ascensionLimit";
+    public static final String option_limit_settings = "potionLimit";
     public static boolean optionLimit = false;
 
     private static final String MODNAME = "Better Lab";
@@ -200,7 +200,7 @@ public class BetterLab implements
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
         ModPanel settingsPanel = new ModPanel();
 
-        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Disables Dispel option.",
+        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Limits potion brew to base game options. (Fixes certain interactions with modded potions)",
                 350.0f, 750.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 optionLimit,
                 settingsPanel,

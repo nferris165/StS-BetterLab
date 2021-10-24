@@ -3,6 +3,7 @@ package betterLab.potions;
 import betterLab.BetterLab;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
@@ -12,22 +13,24 @@ import java.util.ArrayList;
 public class LabPotion extends AbstractPotion {
 
 
-    public static final String POTION_ID = BetterLab.makeID("AltarPotion");
+    public static final String POTION_ID = BetterLab.makeID("LabPotion");
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(POTION_ID);
 
     public static final String NAME = potionStrings.NAME;
     public static final String[] DESCRIPTIONS = potionStrings.DESCRIPTIONS;
 
     private ArrayList<AbstractPotion> potions;
-    private AbstractPotion pot1, pot2, pot3;
+
+    public LabPotion() {
+        super(NAME, POTION_ID, PotionRarity.PLACEHOLDER, PotionSize.HEART, PotionColor.POWER);
+
+        isThrown = false;
+    }
 
     public LabPotion(ArrayList<AbstractPotion> pots) {
         super(NAME, POTION_ID, PotionRarity.PLACEHOLDER, PotionSize.HEART, PotionColor.POWER);
 
         this.potions = pots;
-        this.pot1 = pots.get(0);
-        this.pot2 = pots.get(1);
-        this.pot3 = pots.get(2);
 
         isThrown = false;
         initializeData();
@@ -35,9 +38,11 @@ public class LabPotion extends AbstractPotion {
 
     @Override
     public void use(AbstractCreature target) {
-        pot1.use(target);
-        pot2.use(target);
-        pot3.use(target);
+
+        AbstractCreature enemy = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+        for(AbstractPotion p : potions){
+            p.use(p.targetRequired ? enemy : target);
+        }
     }
 
     @Override
@@ -45,16 +50,14 @@ public class LabPotion extends AbstractPotion {
         this.potency = this.getPotency();
 
         if(this.potions == null){
-            this.tips.clear();
-            this.tips.add(new PowerTip(this.name, ""));
             return;
         }
 
-        pot1.initializeData();
-        pot2.initializeData();
-        pot3.initializeData();
+        potions.get(0).initializeData();
+        potions.get(1).initializeData();
+        potions.get(2).initializeData();
 
-        this.description = pot1.description + " NL " + pot2.description + " NL " + pot3.description;
+        this.description = potions.get(0).description + " NL " + potions.get(1).description + " NL " + potions.get(2).description;
 
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));

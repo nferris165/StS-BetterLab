@@ -153,12 +153,62 @@ public class BetterLabEvent extends AbstractImageEvent {
     private void setBrewOptions(AbstractPotion.PotionRarity rarity){
         this.potOptions.clear();
         for(int i = 0; i < 3; i++){
-            potOptions.add(AbstractDungeon.returnRandomPotion(rarity, false));
+            AbstractPotion temp;
+            do {
+                temp = BetterLab.optionLimit
+                        ? getPotion(rarity)
+                        : AbstractDungeon.returnRandomPotion(rarity, false);
+            } while(potOptions.contains(temp));
+            potOptions.add(temp);
         }
         this.EventText.clearAllDialogs();
         this.EventText.setDialogOption(OPTIONS[8] + potOptions.get(0).name + OPTIONS[9], potOptions.get(0));
         this.EventText.setDialogOption(OPTIONS[8] + potOptions.get(1).name + OPTIONS[9], potOptions.get(1));
         this.EventText.setDialogOption(OPTIONS[8] + potOptions.get(2).name + OPTIONS[9], potOptions.get(2));
+    }
+
+    private AbstractPotion getPotion(AbstractPotion.PotionRarity rarity){
+        ArrayList<String> retVal = new ArrayList<>();
+
+        switch(rarity){
+            case COMMON:
+                retVal.add("Block Potion");
+                retVal.add("Dexterity Potion");
+                retVal.add("Energy Potion");
+                retVal.add("Explosive Potion");
+                retVal.add("Fire Potion");
+                retVal.add("Strength Potion");
+                retVal.add("Swift Potion");
+                retVal.add("Weak Potion");
+                retVal.add("FearPotion");
+                retVal.add("AttackPotion");
+                retVal.add("SkillPotion");
+                retVal.add("PowerPotion");
+                retVal.add("ColorlessPotion");
+                retVal.add("SteroidPotion");
+                retVal.add("SpeedPotion");
+                retVal.add("BlessingOfTheForge");
+                break;
+            case UNCOMMON:
+                retVal.add("Ancient Potion");
+                retVal.add("DistilledChaos");
+                retVal.add("DuplicationPotion");
+                retVal.add("EssenceOfSteel");
+                retVal.add("GamblersBrew");
+                retVal.add("LiquidBronze");
+                retVal.add("LiquidMemories");
+                retVal.add("Regen Potion");
+                break;
+            case RARE:
+                retVal.add("CultistPotion");
+                retVal.add("EntropicBrew");
+                retVal.add("Fruit Juice");
+                retVal.add("SmokeBomb");
+                retVal.add("SneckoOil");
+                break;
+        }
+
+        return PotionHelper.getPotion(retVal.get(AbstractDungeon.potionRng.random(retVal.size() - 1)));
     }
 
     @Override
