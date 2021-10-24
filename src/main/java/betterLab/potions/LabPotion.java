@@ -1,16 +1,18 @@
 package betterLab.potions;
 
+import basemod.abstracts.CustomSavable;
 import betterLab.BetterLab;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 
 import java.util.ArrayList;
 
-public class LabPotion extends AbstractPotion {
+public class LabPotion extends AbstractPotion implements CustomSavable<String> {
 
 
     public static final String POTION_ID = BetterLab.makeID("LabPotion");
@@ -70,7 +72,22 @@ public class LabPotion extends AbstractPotion {
 
     @Override
     public int getPotency(final int ascension) {
-        int pot = 15;
-        return pot;
+        return 1;
+    }
+
+    @Override
+    public String onSave() {
+        return potions.get(0).ID + "///" + potions.get(1).ID + "///" + potions.get(2).ID;
+    }
+
+    @Override
+    public void onLoad(String s) {
+        String[] strings = s.split("///");
+        potions = new ArrayList<>();
+        potions.add(0, PotionHelper.getPotion(strings[0]));
+        potions.add(1, PotionHelper.getPotion(strings[1]));
+        potions.add(2, PotionHelper.getPotion(strings[2]));
+
+        initializeData();
     }
 }

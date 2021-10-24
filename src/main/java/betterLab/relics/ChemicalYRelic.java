@@ -34,7 +34,7 @@ public class ChemicalYRelic extends CustomRelic {
     @Override
     public void atBattleStart() {
         this.flash();
-        AbstractDungeon.player.obtainPotion(PotionHelper.getRandomPotion());
+        AbstractDungeon.player.obtainPotion(AbstractDungeon.returnRandomPotion());
     }
 
     @Override

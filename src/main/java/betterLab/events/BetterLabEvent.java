@@ -156,9 +156,9 @@ public class BetterLabEvent extends AbstractImageEvent {
         for(int i = 0; i < 3; i++){
             AbstractPotion temp;
             do {
-                temp = BetterLab.optionLimit
-                        ? getPotion(rarity)
-                        : AbstractDungeon.returnRandomPotion(rarity, false);
+                temp = BetterLab.moddedPotions
+                        ? AbstractDungeon.returnRandomPotion(rarity, false)
+                        : getPotion(rarity);
             } while(checkUnique(temp) || exclusions.contains(temp.ID));
             potOptions.add(temp);
         }

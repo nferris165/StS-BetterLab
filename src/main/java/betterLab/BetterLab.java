@@ -45,8 +45,8 @@ public class BetterLab implements
 
     //mod settings
     public static Properties defaultSettings = new Properties();
-    public static final String option_limit_settings = "potionLimit";
-    public static boolean optionLimit = false;
+    public static final String modded_potions_settings = "moddedPotions";
+    public static boolean moddedPotions = false;
 
     private static final String MODNAME = "Better Lab";
     private static final String AUTHOR = "Nichilas";
@@ -104,11 +104,11 @@ public class BetterLab implements
         BaseMod.subscribe(this);
 
         logger.info("Adding mod settings");
-        defaultSettings.setProperty(option_limit_settings, "FALSE");
+        defaultSettings.setProperty(modded_potions_settings, "FALSE");
         try {
             SpireConfig config = new SpireConfig("betterLab", "betterLabConfig", defaultSettings);
             config.load();
-            optionLimit = config.getBool(option_limit_settings);
+            moddedPotions = config.getBool(modded_potions_settings);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -200,17 +200,17 @@ public class BetterLab implements
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
         ModPanel settingsPanel = new ModPanel();
 
-        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Limits potion brew to base game options. (Fixes certain interactions with modded potions)",
+        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Enable modded potions when brewing. WARNING: High potential to cause crashes.",
                 350.0f, 750.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
-                optionLimit,
+                moddedPotions,
                 settingsPanel,
                 (label) -> {},
                 (button) -> {
 
-                    optionLimit = button.enabled;
+                    moddedPotions = button.enabled;
                     try {
                         SpireConfig config = new SpireConfig("betterLab", "betterLabConfig", defaultSettings);
-                        config.setBool(option_limit_settings, optionLimit);
+                        config.setBool(modded_potions_settings, moddedPotions);
                         config.save();
                     } catch (Exception e) {
                         e.printStackTrace();
