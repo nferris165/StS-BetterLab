@@ -4,21 +4,23 @@
     "DESCRIPTIONS": [
       "You find yourself in a room filled with racks of test tubes, beakers, flasks, forceps, pinch clamps, stirring rods, tongs, goggles, funnels, pipets, cylinders, condensers, and even a rare spiral tube of glass. NL NL Why do you know the name of all these tools? It doesn't matter, you take a look around.",
       "After much time spent mixing, swirling, and performing other important tasks, you receive your new concoction and carry on your way...",
-      "You spot a book lying on the table titled \"Chemical Y\" and decide to follow it's instructions. NL Making careful use of your Chemical X, you transmute the flask into a much more pure substance.",
+      "You spot a book lying on the table titled \"Chemical Y\" and decide to follow its instructions. NL Making careful use of your Chemical X, you transmute the flask into a much more pure substance.",
       "You spot a book lying on the table with #rthree #gcolorful #bladies on the cover and decide to follow it's instructions. NL You prepare the concoction and finish it by offering a bit of your own #rblood into the flask.",
-      "You are brewing a potion unlike any other. NL It is time to add another ingredient to the mix, but which should you choose?"
+      "The cauldron @swirls@ and ~churns~ unending... NL It is time to add another ingredient to the mix, but which should you choose?",
+      "You see a vat of chemicals nearby and wonder if you have any ingredients to add. NL You drop your #yOdd #yMushroom in and watch as the liquid bursts with color. NL NL After the mixture settles, you fill as many vials as you can hold and get going."
     ],
     "OPTIONS": [
-      "[Search] #gFind #gsome #gPotions!",
-      "[Brew] #gCraft #ga #gunique #gpotion.",
+      "[Search] #gFind #gsome #gPotions.",
+      "[Brew] #gCraft #ga #gUnique #gPotion.",
       "[Transmute] #rLose #rChemical #rX. #gObtain #ga #gspecial #grelic.",
       "[Transmute] #rLose #r",
       " #rHP. #gObtain #gChemical #gX.",
       "[Leave]",
-      "[Concoct] Do something.",
+      "[Brew] #rLose #rCauldron. #gCraft #ganother #gUnique #gPotion.",
       "[Locked] Requires Cauldron.",
       "[Brew] #yAdd ",
-      " #yto #ythe #ymixture."
+      " #yto #ythe #ymixture.",
+      "[Concoct] #rLose #rOdd #rMushroom. #gFill #gyour #gpotion #gslots #gwith #gRare #gPotions!"
     ]
   }
 }

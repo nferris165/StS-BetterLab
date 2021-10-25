@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.Cauldron;
 import com.megacrit.cardcrawl.relics.ChemicalX;
+import com.megacrit.cardcrawl.relics.OddMushroom;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.scene.EventBgParticle;
@@ -38,7 +39,7 @@ public class BetterLabEvent extends AbstractImageEvent {
     public AbstractEventDialog EventText = new AbstractEventDialog();
 
 
-    private static final String CHEM_MSG, BREW_MSG, CHEMX_MSG, ADDPOT_MSG;
+    private static final String CHEM_MSG, BREW_MSG, CHEMX_MSG, ADDPOT_MSG, MUSH_MSG;
     private static final ArrayList<String> COMMONS, UNCOMMONS, RARES, exclusions;
     private int potSlots, relicCost;
     private ArrayList<AbstractPotion> potions;
@@ -67,9 +68,9 @@ public class BetterLabEvent extends AbstractImageEvent {
         else{
             this.EventText.setDialogOption(OPTIONS[3] + this.relicCost + OPTIONS[4], new ChemicalX());
         }
-        this.EventText.setDialogOption(
-                AbstractDungeon.player.hasRelic(Cauldron.ID) ? OPTIONS[6] : OPTIONS[7],
-                AbstractDungeon.player.hasRelic(Cauldron.ID));
+        if(AbstractDungeon.player.hasRelic(OddMushroom.ID)){
+            this.EventText.setDialogOption(OPTIONS[10]);
+        }
     }
 
     public void onEnterRoom() {
@@ -113,7 +114,12 @@ public class BetterLabEvent extends AbstractImageEvent {
                         this.EventText.clearRemainingOptions();
                         break;
                     case 3:
-                        AbstractDungeon.player.loseRelic(Cauldron.ID);
+                        AbstractDungeon.player.loseRelic(OddMushroom.ID);
+                        int slots = AbstractDungeon.player.potionSlots;
+                        for(int i = 0; i < slots; i++){
+                            AbstractDungeon.player.obtainPotion(AbstractDungeon.returnRandomPotion(AbstractPotion.PotionRarity.RARE, true));
+                        }
+                        this.EventText.updateBodyText(MUSH_MSG);
                         this.screen = CUR_SCREEN.COMPLETE;
                         this.EventText.updateDialogOption(0, OPTIONS[5]);
                         this.EventText.clearRemainingOptions();
@@ -142,12 +148,27 @@ public class BetterLabEvent extends AbstractImageEvent {
 
                 this.EventText.updateBodyText(BREW_MSG);
                 this.screen = CUR_SCREEN.COMPLETE;
-                this.EventText.updateDialogOption(0, OPTIONS[5]);
-                this.EventText.clearRemainingOptions();
+                this.EventText.clearAllDialogs();
+                this.EventText.setDialogOption(OPTIONS[5]);
+                this.EventText.setDialogOption(
+                        AbstractDungeon.player.hasRelic(Cauldron.ID) ? OPTIONS[6] : OPTIONS[7],
+                        !AbstractDungeon.player.hasRelic(Cauldron.ID));
                 break;
             case COMPLETE:
-                AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
-                this.openMap();
+                switch(buttonPressed){
+                    case 0:
+                        AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
+                        this.openMap();
+                        break;
+                    case 1:
+                        this.EventText.updateBodyText(ADDPOT_MSG);
+                        AbstractDungeon.player.loseRelic(Cauldron.ID);
+                        this.screen = CUR_SCREEN.BREW1;
+                        this.potions.clear();
+                        setBrewOptions(AbstractPotion.PotionRarity.COMMON);
+                        break;
+                }
+
         }
     }
 
@@ -243,6 +264,7 @@ public class BetterLabEvent extends AbstractImageEvent {
         CHEM_MSG = DESCRIPTIONS[2];
         CHEMX_MSG = DESCRIPTIONS[3];
         ADDPOT_MSG = DESCRIPTIONS[4];
+        MUSH_MSG = DESCRIPTIONS[5];
 
         COMMONS = new ArrayList<>();
         COMMONS.add("Block Potion");

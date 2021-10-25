@@ -6,8 +6,8 @@ import betterLab.util.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 
 import static betterLab.BetterLab.makeRelicOutlinePath;
 import static betterLab.BetterLab.makeRelicPath;
@@ -32,9 +32,9 @@ public class ChemicalYRelic extends CustomRelic {
 
 
     @Override
-    public void atBattleStart() {
+    public void atTurnStart() {
         this.flash();
-        AbstractDungeon.player.obtainPotion(AbstractDungeon.returnRandomPotion());
+        AbstractDungeon.player.obtainPotion(AbstractDungeon.returnRandomPotion(AbstractPotion.PotionRarity.COMMON, false));
     }
 
     @Override

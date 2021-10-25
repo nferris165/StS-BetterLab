@@ -32,7 +32,7 @@ public class LabPotion extends AbstractPotion implements CustomSavable<String> {
     public LabPotion(ArrayList<AbstractPotion> pots) {
         super(NAME, POTION_ID, PotionRarity.PLACEHOLDER, PotionSize.HEART, PotionColor.POWER);
 
-        this.potions = pots;
+        this.potions = new ArrayList<>(pots);
 
         isThrown = false;
         initializeData();
@@ -59,7 +59,7 @@ public class LabPotion extends AbstractPotion implements CustomSavable<String> {
         potions.get(1).initializeData();
         potions.get(2).initializeData();
 
-        this.description = potions.get(0).description + " NL " + potions.get(1).description + " NL " + potions.get(2).description;
+        this.description = DESCRIPTIONS[0] + potions.get(0).description + " NL " + potions.get(1).description + " NL " + potions.get(2).description;
 
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));

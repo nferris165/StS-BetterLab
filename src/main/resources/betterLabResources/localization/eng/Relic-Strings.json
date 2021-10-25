@@ -3,7 +3,7 @@
     "NAME": "Chemical Y",
     "FLAVOR": "A taste of something new every time!",
     "DESCRIPTIONS": [
-      "At the start of each combat, obtain a random potion."
+      "At the start of each turn, obtain a random common potion."
     ]
   }
 }
