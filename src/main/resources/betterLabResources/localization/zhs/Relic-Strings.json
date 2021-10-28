@@ -1,0 +1,9 @@
+{
+  "betterLab:ChemicalYRelic": {
+    "NAME": "化学物Y",
+    "FLAVOR": "常尝常新！",
+    "DESCRIPTIONS": [
+      "在每个回合开始时，随机获得一瓶普通药水。"
+    ]
+  }
+}
