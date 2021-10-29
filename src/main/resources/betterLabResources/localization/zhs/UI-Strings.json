@@ -1,3 +1,7 @@
 {
-
+  "betterLab:ConfigMenuText": {
+    "TEXT": [
+      "在炼制时启用mod药水。警告：很可能引起崩溃。"
+    ]
+  }
 }

@@ -197,10 +197,11 @@ public class BetterLab implements
 
     @Override
     public void receivePostInitialize() {
+        UIStrings configStrings = CardCrawlGame.languagePack.getUIString(makeID("ConfigMenuText"));
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
         ModPanel settingsPanel = new ModPanel();
 
-        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Enable modded potions when brewing. WARNING: High potential to cause crashes.",
+        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton(configStrings.TEXT[0],
                 350.0f, 750.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 moddedPotions,
                 settingsPanel,

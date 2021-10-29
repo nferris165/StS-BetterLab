@@ -1,3 +1,7 @@
 {
-
+  "betterLab:ConfigMenuText": {
+    "TEXT": [
+      "Enable modded potions when brewing. WARNING: High potential to cause crashes."
+    ]
+  }
 }
